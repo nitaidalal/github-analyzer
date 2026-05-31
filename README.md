@@ -42,6 +42,16 @@ This service is designed to:
 
 ---
 
+## 🏗️ Project Architecture
+
+<div align="center">
+
+![Project Architecture Diagram](./images/project-architecture.png)
+
+</div>
+
+---
+
 ## ⭐ Features
 
 ### Core Features
