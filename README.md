@@ -206,11 +206,17 @@ Server running on http://localhost:3000
 
 ### Step 6: Test the Server
 
-```bash
-# Test if server is running
-curl http://localhost:3000
-# Expected response: {"status":"ok","message":"GitHub Profile Analyzer API"}
-```
+**Using Postman:**
+- **Method**: `GET`
+- **URL**: `http://localhost:3000`
+- Click **Send**
+- Expected response:
+  ```json
+  {
+    "status": "ok",
+    "message": "GitHub Profile Analyzer API"
+  }
+  ```
 
 ---
 
@@ -274,13 +280,24 @@ Content-Type: application/json
 }
 ```
 
-#### Request
+#### Request (Postman)
 
-```bash
-curl -X POST http://localhost:3000/api/profiles/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"username": "torvalds"}'
-```
+**Step 1:** Open Postman and create a new request
+
+**Step 2:** Set up the request:
+- **Method**: `POST`
+- **URL**: `http://localhost:3000/api/profiles/analyze`
+- **Headers Tab**: Add header
+  - Key: `Content-Type`
+  - Value: `application/json`
+- **Body Tab**: Select `raw` → `JSON`
+  ```json
+  {
+    "username": "torvalds"
+  }
+  ```
+
+**Step 3:** Click **Send**
 
 #### Responses
 
@@ -344,11 +361,15 @@ curl -X POST http://localhost:3000/api/profiles/analyze \
 GET /api/profiles
 ```
 
-#### Request
+#### Request (Postman)
 
-```bash
-curl http://localhost:3000/api/profiles
-```
+**Step 1:** Open Postman and create a new request
+
+**Step 2:** Set up the request:
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/api/profiles`
+
+**Step 3:** Click **Send**
 
 #### Response
 
@@ -402,11 +423,17 @@ curl http://localhost:3000/api/profiles
 GET /api/profiles/:username
 ```
 
-#### Request
+#### Request (Postman)
 
-```bash
-curl http://localhost:3000/api/profiles/torvalds
-```
+**Step 1:** Open Postman and create a new request
+
+**Step 2:** Set up the request:
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/api/profiles/torvalds`
+
+**Step 3:** Click **Send**
+
+**Note:** Replace `torvalds` with any other GitHub username you've already analyzed
 
 #### Responses
 
@@ -642,41 +669,56 @@ Located in `src/middleware/errorHandler.js`, it:
 
 ### Example 1: Analyze Multiple Developers
 
-```bash
-# Analyze Linus Torvalds
-curl -X POST http://localhost:3000/api/profiles/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"username": "torvalds"}'
+#### Request 1: Analyze Linus Torvalds (Postman)
+- **Method**: `POST`
+- **URL**: `http://localhost:3000/api/profiles/analyze`
+- **Headers**: `Content-Type: application/json`
+- **Body** (raw JSON):
+  ```json
+  {"username": "torvalds"}
+  ```
 
-# Analyze Guido van Rossum
-curl -X POST http://localhost:3000/api/profiles/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"username": "gvanrossum"}'
+#### Request 2: Analyze Guido van Rossum (Postman)
+- **Method**: `POST`
+- **URL**: `http://localhost:3000/api/profiles/analyze`
+- **Headers**: `Content-Type: application/json`
+- **Body** (raw JSON):
+  ```json
+  {"username": "gvanrossum"}
+  ```
 
-# Get all analyzed profiles
-curl http://localhost:3000/api/profiles
-```
+#### Request 3: Get All Analyzed Profiles (Postman)
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/api/profiles`
+- Click **Send**
 
 ### Example 2: Get Recent Analysis
 
-```bash
-# Get most recently analyzed profile
-curl http://localhost:3000/api/profiles | jq '.profiles[0]'
+#### Request 1: Get Most Recently Analyzed Profile (Postman)
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/api/profiles`
+- Click **Send**
+- The first item in the `profiles` array is the most recent
 
-# Get specific developer
-curl http://localhost:3000/api/profiles/torvalds | jq '.profile'
-```
+#### Request 2: Get Specific Developer (Postman)
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/api/profiles/torvalds`
+- Click **Send**
+- Look at the `profile` object in the response
 
 ### Example 3: Re-analyze for Updates
 
-```bash
-# Analyze same profile again to update metrics
-curl -X POST http://localhost:3000/api/profiles/analyze \
-  -H "Content-Type: application/json" \
-  -d '{"username": "torvalds"}'
-
-# The analyzed_at timestamp will be updated
-```
+#### Request: Re-analyze Same Profile (Postman)
+- **Method**: `POST`
+- **URL**: `http://localhost:3000/api/profiles/analyze`
+- **Headers**: `Content-Type: application/json`
+- **Body** (raw JSON):
+  ```json
+  {"username": "torvalds"}
+  ```
+- Click **Send**
+- The `analyzed_at` timestamp will be updated to the current time
+- All metrics (stars, forks, languages) will be refreshed
 
 ---
 
