@@ -12,6 +12,16 @@
 
 ---
 
+## 🌐 Live Demo
+
+**API Base URL:** [`https://github-analyzer-efiy.onrender.com/`](https://github-analyzer-efiy.onrender.com/)
+
+Try the API endpoints directly using Postman or any HTTP client:
+- Health Check: `https://github-analyzer-efiy.onrender.com/`
+- All Profiles: `https://github-analyzer-efiy.onrender.com/api/profiles`
+
+---
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -25,7 +35,7 @@
 - [Database Schema](#database-schema)
 - [Deployment](#deployment)
 - [Error Handling](#error-handling)
-- [Future Enhancements](#future-enhancements)
+
 
 ---
 
