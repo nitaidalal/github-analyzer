@@ -16,7 +16,7 @@ export const analyzeProfile = async(req, res, next) => {
 
         //upsert into db
         await pool.query(
-            `INSERT INTO profiles
+          `INSERT INTO profiles
             (username, name, bio, avatar_url, location, blog, company, twitter_username, public_repos, followers, following, total_stars, total_forks, top_languages, account_age_days, hireable)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
@@ -34,26 +34,27 @@ export const analyzeProfile = async(req, res, next) => {
                 total_forks = VALUES(total_forks),
                 top_languages = VALUES(top_languages),
                 account_age_days = VALUES(account_age_days),
-                hireable = VALUES(hireable)
+                hireable = VALUES(hireable),
+                analyzed_at = NOW()
             `,
-            [
-                data.username,
-                data.name,
-                data.bio,
-                data.avatar_url,
-                data.location,
-                data.blog,
-                data.company,
-                data.twitter_username,
-                data.public_repos,
-                data.followers,
-                data.following,
-                data.total_stars,
-                data.total_forks,
-                JSON.stringify(data.top_languages),
-                data.account_age_days,
-                data.hireable
-            ]
+          [
+            data.username,
+            data.name,
+            data.bio,
+            data.avatar_url,
+            data.location,
+            data.blog,
+            data.company,
+            data.twitter_username,
+            data.public_repos,
+            data.followers,
+            data.following,
+            data.total_stars,
+            data.total_forks,
+            JSON.stringify(data.top_languages),
+            data.account_age_days,
+            data.hireable,
+          ],
         );
 
         const [rows] = await pool.query("SELECT * FROM profiles WHERE username = ?", [data.username]);
