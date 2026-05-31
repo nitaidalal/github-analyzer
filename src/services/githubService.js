@@ -38,8 +38,8 @@ export const fetchGitHubProfile = async (username) => {
 
     const topLanguages = Object.entries(languageCount)
         .sort((a,b) => b[1] - a[1])
-        .slice(0,5)
-        .map(([lang]) => lang); 
+        .slice(0,5);
+        // .map(([lang]) => lang); 
 
     const accountAgeDays = Math.floor((new Date() - new Date(user.created_at)) / (1000 * 60 * 60 * 24));
 
